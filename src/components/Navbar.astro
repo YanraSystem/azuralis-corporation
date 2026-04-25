@@ -1,0 +1,124 @@
+---
+const currentPath = Astro.url.pathname
+
+const links = [
+  { href: '/', label: 'Accueil' },
+  { href: '/a-propos', label: 'A propos' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+]
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 transition-transform duration-500" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);" id="navbar">
+  <div class="px-[clamp(24px,5vw,80px)]">
+    <div class="flex items-center justify-between h-20 border-b border-[var(--color-border)]">
+      <!-- Logo -->
+      <a href="/" class="block hover:opacity-80 transition-opacity duration-300">
+        <img
+          src="/images/azuralis-logo.png"
+          alt="AZURALIS"
+          class="h-4 w-auto invert"
+        />
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-10">
+        {links.map(link => (
+          <a
+            href={link.href}
+            class:list={[
+              "text-[11px] tracking-[0.12em] uppercase transition-colors duration-300",
+              currentPath === link.href
+                ? "text-[var(--color-text)]"
+                : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile Burger -->
+      <button
+        id="burger"
+        class="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-[5px]"
+        aria-label="Menu"
+      >
+        <span class="w-5 h-px bg-[var(--color-text)] transition-all duration-300 origin-center"></span>
+        <span class="w-5 h-px bg-[var(--color-text)] transition-all duration-300"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-[var(--color-surface)] z-[9999] flex flex-col items-start justify-center px-[clamp(24px,5vw,80px)] gap-8 opacity-0 pointer-events-none transition-opacity duration-500"
+  >
+    <button
+      id="close-menu"
+      class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-[var(--color-text)]"
+      aria-label="Fermer"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Logo in mobile menu -->
+    <img
+      src="/images/azuralis-logo.png"
+      alt="AZURALIS"
+      class="h-5 w-auto invert mb-4"
+    />
+
+    {links.map(link => (
+      <a
+        href={link.href}
+        class:list={[
+          "font-display text-[clamp(2rem,8vw,4rem)] font-300 lowercase tracking-[-0.02em] transition-colors duration-300",
+          currentPath === link.href ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+        ]}
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar')!
+  const burger = document.getElementById('burger')!
+  const mobileMenu = document.getElementById('mobile-menu')!
+  const closeMenu = document.getElementById('close-menu')!
+
+  let lastScroll = 0
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY
+    if (current > lastScroll && current > 100) {
+      navbar.style.transform = 'translateY(-100%)'
+    } else {
+      navbar.style.transform = 'translateY(0)'
+    }
+    if (current > 50) {
+      navbar.style.background = 'rgba(10, 10, 10, 0.85)'
+      navbar.style.backdropFilter = 'blur(20px)'
+    } else {
+      navbar.style.background = 'transparent'
+      navbar.style.backdropFilter = 'none'
+    }
+    lastScroll = current
+  }, { passive: true })
+
+  burger.addEventListener('click', () => {
+    mobileMenu.classList.remove('opacity-0', 'pointer-events-none')
+    mobileMenu.classList.add('opacity-100', 'pointer-events-auto')
+    document.body.style.overflow = 'hidden'
+  })
+  closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.add('opacity-0', 'pointer-events-none')
+    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto')
+    document.body.style.overflow = ''
+  })
+</script>

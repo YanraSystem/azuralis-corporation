@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+---
+
+<Layout title="A propos" description="Decouvrez l'equipe AZURALIS CORPORATION. Trading Forex & Matieres Premieres.">
+  <Navbar />
+
+  <!-- Header -->
+  <section class="pt-32 pb-0 md:pt-40">
+    <div class="px-[clamp(24px,5vw,80px)]">
+      <div class="flex items-center gap-4 mb-12" data-reveal>
+        <span class="font-mono text-[11px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)]">A propos</span>
+        <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+      </div>
+
+      <h1 class="font-display text-[clamp(3rem,8vw,7rem)] font-300 tracking-[-0.04em] text-[var(--color-text)] leading-[0.95] mb-4" data-reveal>
+        L'equipe derriere
+      </h1>
+      <img src="/images/azuralis-logo.png" alt="AZURALIS" class="h-[clamp(1.5rem,3vw,2.5rem)] w-auto invert opacity-40 mb-8" data-reveal />
+
+      <p class="text-[15px] font-300 text-[var(--color-text-muted)] max-w-lg leading-[1.7] mb-16" data-reveal>
+        Des traders animes par la rigueur et la transparence. Pas de guru, pas de formation miracle — juste du travail.
+      </p>
+    </div>
+  </section>
+
+  <div class="line-accent mx-[clamp(24px,5vw,80px)]"></div>
+
+  <!-- Fondateur -->
+  <section class="py-[clamp(5rem,12vh,10rem)]">
+    <div class="px-[clamp(24px,5vw,80px)]">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-[clamp(3rem,6vw,6rem)] items-start">
+        <!-- Photo -->
+        <div data-reveal-left>
+          <div class="aspect-[3/4] bg-[var(--color-surface-2)] border border-[var(--color-border)] relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)]">Photo a venir</span>
+            </div>
+            <!-- Overlay corner label -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[var(--color-surface)] to-transparent">
+              <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)]">Brahim Djelloul</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <div data-reveal-right>
+          <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-accent)] block mb-6">Fondateur & CEO</span>
+
+          <h2 class="font-display text-[clamp(2rem,4vw,3.5rem)] font-300 tracking-[-0.02em] text-[var(--color-text)] leading-[1.1] mb-3">
+            Brahim Djelloul
+          </h2>
+          <p class="font-mono text-[11px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] mb-10">Trader — Forex & Matieres Premieres</p>
+
+          <div class="space-y-6 text-[15px] font-300 text-[var(--color-text-muted)] leading-[1.7]">
+            <p>
+              Trader actif depuis 2024, specialise sur le Forex et les matieres premieres. Brahim a fonde AZURALIS avec une conviction : le trading n'a pas besoin de promesses, il a besoin de methode.
+            </p>
+            <p>
+              Son approche combine analyse technique rigoureuse et gestion du risque stricte. Chaque operation est documentee, chaque decision est calculee. L'objectif n'est pas de "faire un coup" — c'est de construire dans la duree.
+            </p>
+            <p>
+              La vision : batir une marque qui inspire confiance dans un milieu souvent domine par le bruit et les vendeurs de reve.
+            </p>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-4 mt-12 pt-8 border-t border-[var(--color-border)]" data-reveal-stagger>
+            <div>
+              <p class="font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--color-text-subtle)]">Depuis</p>
+              <p class="font-display text-[clamp(1.5rem,2.5vw,2.5rem)] font-300 text-[var(--color-text)] mt-2">2024</p>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--color-text-subtle)]">Focus</p>
+              <p class="font-display text-[clamp(1.5rem,2.5vw,2.5rem)] font-300 text-[var(--color-text)] mt-2">FX</p>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--color-text-subtle)]">Equipe</p>
+              <p class="font-display text-[clamp(1.5rem,2.5vw,2.5rem)] font-300 text-[var(--color-text)] mt-2">2</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipe -->
+  <section class="py-[clamp(5rem,12vh,10rem)] border-t border-[var(--color-border)]">
+    <div class="px-[clamp(24px,5vw,80px)]">
+      <div class="flex items-center gap-4 mb-16" data-reveal>
+        <span class="section-num">Equipe</span>
+        <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--color-border)] max-w-3xl" data-reveal-stagger>
+        <!-- Brahim -->
+        <div class="bg-[var(--color-surface)] p-[clamp(2rem,3vw,3rem)]">
+          <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-accent)] block mb-4">01</span>
+          <h3 class="font-display text-[clamp(1.5rem,2.5vw,2rem)] font-300 text-[var(--color-text)] mb-1">Brahim Djelloul</h3>
+          <p class="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] mb-4">CEO & Trader</p>
+          <p class="text-[14px] font-300 text-[var(--color-text-muted)] leading-[1.7]">
+            Fondateur d'AZURALIS. Forex & Matieres Premieres.
+          </p>
+        </div>
+
+        <!-- Lario -->
+        <div class="bg-[var(--color-surface)] p-[clamp(2rem,3vw,3rem)]">
+          <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-accent)] block mb-4">02</span>
+          <h3 class="font-display text-[clamp(1.5rem,2.5vw,2rem)] font-300 text-[var(--color-text)] mb-1">Lario</h3>
+          <p class="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] mb-4">Trader</p>
+          <p class="text-[14px] font-300 text-[var(--color-text-muted)] leading-[1.7]">
+            Membre de l'equipe AZURALIS.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision statement -->
+  <section class="py-[clamp(6rem,15vh,12rem)] border-t border-[var(--color-border)]">
+    <div class="px-[clamp(24px,5vw,80px)] max-w-4xl" data-reveal>
+      <blockquote>
+        <p class="font-display text-[clamp(1.8rem,4vw,3rem)] font-300 tracking-[-0.02em] text-[var(--color-text)] leading-[1.25] italic">
+          "Notre objectif n'est pas de vendre du reve, mais de construire quelque chose qui dure."
+        </p>
+        <footer class="mt-8 flex items-center gap-4">
+          <div class="w-8 h-px bg-[var(--color-accent)]"></div>
+          <span class="font-mono text-[11px] tracking-[0.12em] uppercase text-[var(--color-text-muted)]">AZURALIS Corporation</span>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

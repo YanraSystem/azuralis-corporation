@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Navbar from '../../components/Navbar.astro'
+import Footer from '../../components/Footer.astro'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+
+const categoryLabels: Record<string, string> = {
+  forex: 'Forex',
+  'matieres-premieres': 'Commodites',
+  analyse: 'Analyse',
+  education: 'Education',
+}
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <Navbar />
+
+  <article class="pt-32 md:pt-40">
+    <div class="px-[clamp(24px,5vw,80px)] max-w-3xl">
+      <!-- Back -->
+      <a href="/blog" class="group inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] hover:text-[var(--color-text)] transition-colors duration-300 mb-12">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform duration-300 group-hover:-translate-x-1">
+          <path d="M19 12H5M12 19l-7-7 7-7"></path>
+        </svg>
+        Retour
+      </a>
+
+      <!-- Meta -->
+      <div class="flex items-center gap-4 mb-6" data-reveal>
+        <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-accent)]">
+          {categoryLabels[post.data.category] || post.data.category}
+        </span>
+        <span class="w-4 h-px bg-[var(--color-border)]"></span>
+        <span class="font-mono text-[10px] tracking-[0.12em] text-[var(--color-text-subtle)]">
+          {new Date(post.data.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+        </span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="font-display text-[clamp(2rem,5vw,4rem)] font-300 tracking-[-0.03em] text-[var(--color-text)] leading-[1.1] mb-8" data-reveal>
+        {post.data.title}
+      </h1>
+
+      <p class="text-[15px] font-300 text-[var(--color-text-muted)] leading-[1.7] mb-8" data-reveal>{post.data.description}</p>
+
+      <!-- Author -->
+      <div class="flex items-center gap-4 pb-10 border-b border-[var(--color-border)]" data-reveal>
+        <div class="w-8 h-px bg-[var(--color-accent)]"></div>
+        <span class="font-mono text-[11px] tracking-[0.12em] uppercase text-[var(--color-text-muted)]">{post.data.author}</span>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="px-[clamp(24px,5vw,80px)] max-w-3xl py-12" data-reveal>
+      <div class="
+        prose max-w-none
+        prose-headings:font-[var(--font-display)] prose-headings:font-300 prose-headings:text-[var(--color-text)] prose-headings:tracking-[-0.02em]
+        prose-h2:text-[clamp(1.5rem,2.5vw,2rem)] prose-h2:mt-14 prose-h2:mb-5
+        prose-h3:text-[clamp(1.2rem,2vw,1.5rem)] prose-h3:mt-10 prose-h3:mb-4
+        prose-p:text-[15px] prose-p:font-300 prose-p:text-[var(--color-text-muted)] prose-p:leading-[1.7] prose-p:mb-5
+        prose-a:text-[var(--color-accent)] prose-a:no-underline hover:prose-a:underline
+        prose-strong:text-[var(--color-text)] prose-strong:font-400
+        prose-ul:text-[var(--color-text-muted)] prose-ol:text-[var(--color-text-muted)]
+        prose-li:text-[15px] prose-li:font-300 prose-li:mb-2
+        prose-blockquote:border-l-[var(--color-accent)] prose-blockquote:text-[var(--color-text-muted)] prose-blockquote:font-[var(--font-display)] prose-blockquote:text-[1.1rem] prose-blockquote:italic prose-blockquote:font-300
+        prose-code:text-[var(--color-accent)] prose-code:bg-[var(--color-surface-2)] prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[13px] prose-code:font-[var(--font-mono)]
+      ">
+        <Content />
+      </div>
+    </div>
+
+    <!-- Back bottom -->
+    <div class="px-[clamp(24px,5vw,80px)] max-w-3xl pb-16">
+      <div class="pt-8 border-t border-[var(--color-border)]">
+        <a href="/blog" class="group inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] hover:text-[var(--color-text)] transition-colors duration-300">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform duration-300 group-hover:-translate-x-1">
+            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+          </svg>
+          Tous les articles
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <Footer />
+</Layout>

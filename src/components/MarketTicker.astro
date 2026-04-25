@@ -1,0 +1,53 @@
+---
+/**
+ * Simulated market data ticker — trading terminal feel
+ */
+const pairs = [
+  { symbol: "EUR/USD", price: "1.0842", change: "+0.12%", up: true },
+  { symbol: "GBP/USD", price: "1.2651", change: "+0.08%", up: true },
+  { symbol: "USD/JPY", price: "157.34", change: "-0.15%", up: false },
+  { symbol: "XAU/USD", price: "2,341.50", change: "+0.67%", up: true },
+  { symbol: "WTI", price: "78.42", change: "-0.23%", up: false },
+  { symbol: "USD/CHF", price: "0.9012", change: "+0.04%", up: true },
+  { symbol: "XAG/USD", price: "27.84", change: "+1.12%", up: true },
+  { symbol: "BRENT", price: "82.15", change: "-0.31%", up: false },
+]
+
+const doubled = [...pairs, ...pairs]
+---
+
+<div class="overflow-hidden bg-[var(--color-surface-2)] border-y border-[var(--color-border)] py-2.5">
+  <div class="market-ticker-track">
+    {doubled.map(pair => (
+      <span class="inline-flex items-center gap-2 px-6 whitespace-nowrap">
+        <span class="font-mono text-[10px] tracking-[0.1em] text-[var(--color-text)] opacity-70">{pair.symbol}</span>
+        <span class="font-mono text-[11px] text-[var(--color-text)]">{pair.price}</span>
+        <span class:list={["font-mono text-[10px]", pair.up ? "text-green-400" : "text-red-400"]}>
+          {pair.change}
+        </span>
+        <span class="w-px h-3 bg-[var(--color-border)] mx-2"></span>
+      </span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .market-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: tickerScroll 40s linear infinite;
+  }
+
+  .market-ticker-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .market-ticker-track { animation: none; }
+  }
+</style>

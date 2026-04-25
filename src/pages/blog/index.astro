@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Navbar from '../../components/Navbar.astro'
+import MarketTicker from '../../components/MarketTicker.astro'
+import Footer from '../../components/Footer.astro'
+import { getCollection } from 'astro:content'
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+)
+
+const categoryLabels: Record<string, string> = {
+  forex: 'Forex',
+  'matieres-premieres': 'Commodites',
+  analyse: 'Analyse',
+  education: 'Education',
+}
+
+const categoryColors: Record<string, string> = {
+  forex: '#3b82f6',
+  'matieres-premieres': '#22c55e',
+  analyse: '#f59e0b',
+  education: '#8b5cf6',
+}
+
+const chartPaths = [
+  "M0 80 Q25 60, 50 70 T100 40",
+  "M0 50 Q25 70, 50 60 T100 80",
+  "M0 70 Q25 40, 50 50 T100 30",
+]
+---
+
+<Layout title="Blog" description="Articles et analyses sur le Forex, les matieres premieres et le trading.">
+  <Navbar />
+
+  <section class="pt-32 md:pt-40">
+    <div class="px-[clamp(24px,5vw,80px)]">
+      <div class="flex items-center gap-4 mb-12" data-reveal>
+        <span class="font-mono text-[11px] tracking-[0.15em] uppercase text-[var(--color-accent)]">Blog</span>
+        <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+        <span class="font-mono text-[10px] tracking-[0.1em] text-[var(--color-text-subtle)]">{posts.length} articles</span>
+      </div>
+
+      <h1 class="font-display text-[clamp(3rem,8vw,6rem)] font-300 tracking-[-0.04em] text-[var(--color-text)] leading-[0.95] mb-16" data-reveal>
+        Analyses <span class="italic text-[var(--color-text-muted)]">& articles</span>
+      </h1>
+    </div>
+  </section>
+
+  <MarketTicker />
+
+  <section class="py-[clamp(4rem,10vh,8rem)]">
+    <div class="px-[clamp(24px,5vw,80px)]">
+      {posts.length === 0 ? (
+        <div class="text-center py-20">
+          <p class="font-mono text-[12px] tracking-[0.1em] uppercase text-[var(--color-text-subtle)]">Articles a venir</p>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-reveal-stagger>
+          {posts.map((post, i) => (
+            <a
+              href={`/blog/${post.id}`}
+              class:list={[
+                "group relative border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-accent)]/20 transition-all duration-500",
+                i === 0 ? "md:col-span-2 lg:col-span-2" : ""
+              ]}
+            >
+              <!-- Mini chart decoration -->
+              <div class="absolute inset-0 opacity-[0.04]">
+                <svg viewBox="0 0 100 100" fill="none" class="w-full h-full" preserveAspectRatio="none">
+                  <path d={chartPaths[i % 3]} stroke={categoryColors[post.data.category] || '#3b82f6'} stroke-width="1"/>
+                </svg>
+              </div>
+
+              <div class="relative p-[clamp(1.5rem,2.5vw,2.5rem)]">
+                <div class="flex items-center gap-3 mb-5">
+                  <span
+                    class="font-mono text-[9px] tracking-[0.15em] uppercase px-2 py-1"
+                    style={`color: ${categoryColors[post.data.category] || '#3b82f6'}; background: ${categoryColors[post.data.category] || '#3b82f6'}15;`}
+                  >
+                    {categoryLabels[post.data.category] || post.data.category}
+                  </span>
+                  <span class="font-mono text-[9px] tracking-[0.1em] text-[var(--color-text-subtle)]">
+                    {new Date(post.data.date).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                  </span>
+                </div>
+
+                <h3 class:list={[
+                  "font-display font-300 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-300 leading-[1.2] mb-4",
+                  i === 0 ? "text-[clamp(1.5rem,3vw,2.5rem)]" : "text-[clamp(1.2rem,2vw,1.5rem)]"
+                ]}>
+                  {post.data.title}
+                </h3>
+
+                <p class:list={[
+                  "text-[14px] font-300 text-[var(--color-text-muted)] leading-[1.7]",
+                  i === 0 ? "mb-6 max-w-xl" : "mb-4 line-clamp-2"
+                ]}>
+                  {post.data.description}
+                </p>
+
+                <div class="flex items-center justify-between pt-4 border-t border-[var(--color-border)]">
+                  <span class="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)]">
+                    {post.data.author}
+                  </span>
+                  <span class="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--color-accent)] group-hover:underline">
+                    Lire →
+                  </span>
+                </div>
+              </div>
+
+              <!-- HUD corner -->
+              <div class="absolute top-0 left-0 w-3 h-3 border-t border-l opacity-20" style={`border-color: ${categoryColors[post.data.category] || '#3b82f6'};`}></div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

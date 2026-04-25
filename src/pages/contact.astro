@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+---
+
+<Layout title="Contact" description="Contactez AZURALIS CORPORATION.">
+  <Navbar />
+
+  <section class="pt-32 md:pt-40">
+    <div class="px-[clamp(24px,5vw,80px)]">
+      <div class="flex items-center gap-4 mb-12" data-reveal>
+        <span class="font-mono text-[11px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)]">Contact</span>
+        <div class="flex-1 h-px bg-[var(--color-border)]"></div>
+      </div>
+
+      <h1 class="font-display text-[clamp(3rem,8vw,7rem)] font-300 tracking-[-0.04em] text-[var(--color-text)] leading-[0.95] mb-16" data-reveal>
+        Entrez en<br />
+        <span class="italic text-[var(--color-text-muted)]">contact</span>
+      </h1>
+    </div>
+  </section>
+
+  <div class="line-accent mx-[clamp(24px,5vw,80px)]"></div>
+
+  <section class="py-[clamp(5rem,12vh,10rem)]">
+    <div class="px-[clamp(24px,5vw,80px)]">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-[clamp(3rem,6vw,6rem)]">
+        <!-- Form -->
+        <div data-reveal-left>
+          <form class="space-y-8" id="contact-form">
+            <div>
+              <label for="name" class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] block mb-3">Nom</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-0 py-3 bg-transparent border-0 border-b border-[var(--color-border)] text-[var(--color-text)] text-[15px] font-300 placeholder-[var(--color-text-subtle)] focus:border-[var(--color-accent)] focus:outline-none transition-colors duration-300"
+                placeholder="Votre nom"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] block mb-3">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-0 py-3 bg-transparent border-0 border-b border-[var(--color-border)] text-[var(--color-text)] text-[15px] font-300 placeholder-[var(--color-text-subtle)] focus:border-[var(--color-accent)] focus:outline-none transition-colors duration-300"
+                placeholder="votre@email.com"
+              />
+            </div>
+
+            <div>
+              <label for="subject" class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] block mb-3">Sujet</label>
+              <select
+                id="subject"
+                name="subject"
+                class="w-full px-0 py-3 bg-transparent border-0 border-b border-[var(--color-border)] text-[var(--color-text)] text-[15px] font-300 focus:border-[var(--color-accent)] focus:outline-none transition-colors duration-300"
+              >
+                <option value="general" class="bg-[var(--color-surface)]">Question generale</option>
+                <option value="collaboration" class="bg-[var(--color-surface)]">Collaboration</option>
+                <option value="trading" class="bg-[var(--color-surface)]">Trading</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] block mb-3">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+                class="w-full px-0 py-3 bg-transparent border-0 border-b border-[var(--color-border)] text-[var(--color-text)] text-[15px] font-300 placeholder-[var(--color-text-subtle)] focus:border-[var(--color-accent)] focus:outline-none transition-colors duration-300 resize-none"
+                placeholder="Votre message..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="group inline-flex items-center gap-3 border border-[var(--color-border)] px-8 py-4 text-[12px] tracking-[0.1em] uppercase text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-hover)] transition-all duration-400 mt-4"
+            >
+              Envoyer
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform duration-400 group-hover:translate-x-1">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </form>
+
+          <p id="form-success" class="hidden mt-8 font-mono text-[12px] tracking-[0.1em] uppercase text-[var(--color-accent)]">
+            Message envoye. Reponse sous 24-48h.
+          </p>
+        </div>
+
+        <!-- Info -->
+        <div class="lg:pt-4" data-reveal-right>
+          <div class="glass p-[clamp(2rem,3vw,3rem)]">
+            <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-accent)] block mb-6">AZURALIS CORPORATION</span>
+            <p class="font-display text-[clamp(1.5rem,2.5vw,2rem)] font-300 italic text-[var(--color-text)] leading-[1.3] mb-6">
+              "Master the Lead. Own the Markets."
+            </p>
+            <div class="pt-6 border-t border-[var(--color-border)] space-y-4">
+              <a
+                href="https://www.instagram.com/azvralis/"
+                target="_blank"
+                rel="noopener"
+                class="flex items-center gap-3 font-mono text-[11px] tracking-[0.12em] uppercase text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors duration-300"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"></span>
+                Instagram — @azvralis
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement
+  const success = document.getElementById('form-success')!
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    form.style.display = 'none'
+    success.classList.remove('hidden')
+  })
+</script>

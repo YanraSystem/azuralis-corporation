@@ -1,0 +1,21 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer class="border-t border-[var(--color-border)]">
+  <div class="px-[clamp(24px,5vw,80px)] py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-6">
+      <img
+        src="/images/azuralis-logo.png"
+        alt="AZURALIS"
+        class="h-3 w-auto invert opacity-40"
+      />
+      <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)]">
+        &copy; {year}
+      </span>
+    </div>
+    <a href="https://www.instagram.com/azvralis/" target="_blank" rel="noopener" class="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] hover:text-[var(--color-text)] transition-colors duration-300">
+      Instagram
+    </a>
+  </div>
+</footer>
