@@ -95,31 +95,53 @@ const links = [
   const closeMenu = document.getElementById('close-menu')!
 
   let lastScroll = 0
+  let menuOpen = false
+  let savedScrollY = 0
+
+  function openMenu() {
+    menuOpen = true
+    savedScrollY = window.scrollY
+    // iOS scroll lock : position fixed + top négatif
+    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${savedScrollY}px`
+    document.body.style.width = '100%'
+    // Garder la navbar visible
+    navbar.style.transform = 'translateY(0)'
+    mobileMenu.classList.remove('opacity-0', 'pointer-events-none')
+    mobileMenu.classList.add('opacity-100', 'pointer-events-auto')
+  }
+
+  function closeMenuFn() {
+    menuOpen = false
+    // Restaurer la position de scroll iOS
+    document.body.style.overflow = ''
+    document.body.style.position = ''
+    document.body.style.top = ''
+    document.body.style.width = ''
+    window.scrollTo(0, savedScrollY)
+    mobileMenu.classList.add('opacity-0', 'pointer-events-none')
+    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto')
+  }
+
   window.addEventListener('scroll', () => {
+    if (menuOpen) return
     const current = window.scrollY
     if (current > lastScroll && current > 100) {
       navbar.style.transform = 'translateY(-100%)'
     } else {
       navbar.style.transform = 'translateY(0)'
     }
-    if (current > 50) {
-      navbar.style.background = 'rgba(10, 10, 10, 0.85)'
-      navbar.style.backdropFilter = 'blur(20px)'
-    } else {
-      navbar.style.background = 'transparent'
-      navbar.style.backdropFilter = 'none'
-    }
+    navbar.style.background = current > 50 ? 'rgba(10, 10, 10, 0.92)' : 'transparent'
+    navbar.style.backdropFilter = current > 50 ? 'blur(20px)' : 'none'
     lastScroll = current
   }, { passive: true })
 
-  burger.addEventListener('click', () => {
-    mobileMenu.classList.remove('opacity-0', 'pointer-events-none')
-    mobileMenu.classList.add('opacity-100', 'pointer-events-auto')
-    document.body.style.overflow = 'hidden'
-  })
-  closeMenu.addEventListener('click', () => {
-    mobileMenu.classList.add('opacity-0', 'pointer-events-none')
-    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto')
-    document.body.style.overflow = ''
+  burger.addEventListener('click', openMenu)
+  closeMenu.addEventListener('click', closeMenuFn)
+
+  // Fermer aussi en cliquant sur un lien du menu
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenuFn)
   })
 </script>
