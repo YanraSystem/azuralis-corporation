@@ -41,8 +41,8 @@ const chartPaths = [
         <span class="font-mono text-[10px] tracking-[0.1em] text-[var(--color-text-subtle)]">{posts.length} articles</span>
       </div>
 
-      <h1 class="font-display text-[clamp(3rem,8vw,6rem)] font-300 tracking-[-0.04em] text-[var(--color-text)] leading-[0.95] mb-16" data-reveal>
-        Analyses <span class="italic text-[var(--color-text-muted)]">& articles</span>
+      <h1 class="font-display text-[clamp(3rem,8vw,6rem)] font-600 tracking-[-0.025em] text-[var(--color-text)] leading-[0.95] mb-16" data-reveal>
+        Analyses <span class="font-300 text-[var(--color-text-muted)]">& articles</span>
       </h1>
     </div>
   </section>
@@ -65,12 +65,24 @@ const chartPaths = [
                 i === 0 ? "md:col-span-2 lg:col-span-2" : ""
               ]}
             >
-              <!-- Mini chart decoration -->
-              <div class="absolute inset-0 opacity-[0.04]">
-                <svg viewBox="0 0 100 100" fill="none" class="w-full h-full" preserveAspectRatio="none">
-                  <path d={chartPaths[i % 3]} stroke={categoryColors[post.data.category] || '#3b82f6'} stroke-width="1"/>
-                </svg>
-              </div>
+              <!-- Thumbnail image -->
+              {post.data.image ? (
+                <div class="relative overflow-hidden" style={i === 0 ? "height: 220px;" : "height: 160px;"}>
+                  <img
+                    src={post.data.image}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a]/60"></div>
+                </div>
+              ) : (
+                <!-- Mini chart decoration fallback -->
+                <div class="absolute inset-0 opacity-[0.04]">
+                  <svg viewBox="0 0 100 100" fill="none" class="w-full h-full" preserveAspectRatio="none">
+                    <path d={chartPaths[i % 3]} stroke={categoryColors[post.data.category] || '#3b82f6'} stroke-width="1"/>
+                  </svg>
+                </div>
+              )}
 
               <div class="relative p-[clamp(1.5rem,2.5vw,2.5rem)]">
                 <div class="flex items-center gap-3 mb-5">

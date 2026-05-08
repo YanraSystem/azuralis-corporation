@@ -14,9 +14,30 @@ import Footer from '../components/Footer.astro'
        HERO — Split layout: text left, chart right
   ══════════════════════════════════════════════ -->
   <section class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Video background (desktop) -->
+    <video
+      class="absolute inset-0 w-full h-full object-cover hidden md:block"
+      src="/videos/hero.mp4"
+      autoplay
+      loop
+      muted
+      playsinline
+      aria-hidden="true"
+    ></video>
+
+    <!-- Hero image fallback (mobile + while video loads) -->
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style="background-image: url('/images/hero-bg.jpg');"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-[#0a0a0a]/75"></div>
+
     <!-- HUD grid -->
     <div class="absolute inset-0 opacity-[0.025]" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.15) 59px, rgba(255,255,255,0.15) 60px), repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.15) 59px, rgba(255,255,255,0.15) 60px);"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(59,130,246,0.06),transparent_60%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(59,130,246,0.04),transparent_60%)]"></div>
 
     <!-- Logo watermark -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[clamp(500px,70vw,900px)] pointer-events-none select-none">
@@ -33,11 +54,11 @@ import Footer from '../components/Footer.astro'
             </span>
           </div>
 
-          <h1 class="font-display font-300 tracking-[-0.04em] leading-[0.9] mb-8" data-reveal>
+          <h1 class="font-display font-600 tracking-[-0.025em] leading-[0.92] mb-8" data-reveal>
             <span class="block text-[clamp(2.8rem,7vw,6.5rem)] text-[var(--color-text)]">
               Master the Lead.
             </span>
-            <span class="block text-[clamp(2.8rem,7vw,6.5rem)] text-[var(--color-text)] italic">
+            <span class="block text-[clamp(2.8rem,7vw,6.5rem)] text-[var(--color-accent)]">
               Own the Markets.
             </span>
           </h1>
@@ -49,16 +70,16 @@ import Footer from '../components/Footer.astro'
           <!-- Stats row -->
           <div class="flex gap-10 mb-10 pt-8 border-t border-[var(--color-border)]" data-reveal-stagger>
             <div>
-              <p class="font-display text-[clamp(1.8rem,3vw,2.5rem)] font-300 text-[var(--color-text)]">FX</p>
+              <p class="font-mono text-[clamp(1.1rem,2vw,1.5rem)] font-500 text-[var(--color-text)]">EUR/USD</p>
               <p class="font-mono text-[9px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] mt-1">Forex</p>
             </div>
             <div>
-              <p class="font-display text-[clamp(1.8rem,3vw,2.5rem)] font-300 text-[var(--color-text)]">CMDTY</p>
-              <p class="font-mono text-[9px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] mt-1">Commodites</p>
+              <p class="font-mono text-[clamp(1.1rem,2vw,1.5rem)] font-500 text-green-400">XAU/USD</p>
+              <p class="font-mono text-[9px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] mt-1">Or & Metaux</p>
             </div>
             <div>
-              <p class="font-display text-[clamp(1.8rem,3vw,2.5rem)] font-300 text-green-400">+</p>
-              <p class="font-mono text-[9px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] mt-1">Rigueur</p>
+              <p class="font-mono text-[clamp(1.1rem,2vw,1.5rem)] font-500 text-[var(--color-text)]">24/5</p>
+              <p class="font-mono text-[9px] tracking-[0.15em] uppercase text-[var(--color-text-subtle)] mt-1">Marches</p>
             </div>
           </div>
 
@@ -104,13 +125,10 @@ import Footer from '../components/Footer.astro'
       <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-6">
         <!-- Forex — large card -->
         <div class="group relative border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-accent)]/20 transition-all duration-500" data-reveal-left>
-          <!-- Chart background -->
-          <div class="absolute inset-0 opacity-[0.04]">
-            <svg viewBox="0 0 400 200" fill="none" class="w-full h-full">
-              <path d="M0 150 Q50 130, 100 140 T200 100 T300 80 T400 50" stroke="#3b82f6" stroke-width="1.5"/>
-              <path d="M0 150 Q50 130, 100 140 T200 100 T300 80 T400 50 V200 H0Z" fill="url(#fadeBlue)"/>
-              <defs><linearGradient id="fadeBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></linearGradient></defs>
-            </svg>
+          <!-- Background image -->
+          <div class="absolute inset-0">
+            <img src="/images/blog/forex-basics.jpg" alt="" class="w-full h-full object-cover opacity-10 transition-all duration-700 group-hover:opacity-15 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/90 via-[#0a0a0a]/70 to-transparent"></div>
           </div>
 
           <div class="relative p-[clamp(2rem,4vw,3.5rem)]">
@@ -158,7 +176,12 @@ import Footer from '../components/Footer.astro'
         <!-- Right column — stacked cards -->
         <div class="flex flex-col gap-6">
           <!-- Matieres Premieres -->
-          <div class="group relative border border-[var(--color-border)] p-[clamp(2rem,3vw,2.5rem)] flex-1 hover:border-[var(--color-accent)]/20 transition-all duration-500" data-reveal-right>
+          <div class="group relative border border-[var(--color-border)] flex-1 overflow-hidden hover:border-[var(--color-accent)]/20 transition-all duration-500" data-reveal-right>
+            <div class="absolute inset-0">
+              <img src="/images/blog/gold-commodities.jpg" alt="" class="w-full h-full object-cover opacity-15 transition-all duration-700 group-hover:opacity-25 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-[#0a0a0a]/80"></div>
+            </div>
+          <div class="relative p-[clamp(2rem,3vw,2.5rem)]">
             <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--color-accent)] block mb-4">Commodities</span>
             <h3 class="font-display text-[clamp(1.8rem,3vw,2.5rem)] font-300 tracking-[-0.02em] text-[var(--color-text)] mb-4 leading-[1.1]">
               Matieres Premieres
@@ -176,6 +199,7 @@ import Footer from '../components/Footer.astro'
                 <p class="font-mono text-[16px] text-red-400 mt-1">78.42</p>
               </div>
             </div>
+          </div>
           </div>
 
           <!-- Risk Management mini card -->
@@ -223,9 +247,9 @@ import Footer from '../components/Footer.astro'
       <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 items-start">
         <!-- Left — statement -->
         <div data-reveal-left>
-          <h2 class="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-300 tracking-[-0.03em] text-[var(--color-text)] leading-[1.05] mb-8">
+          <h2 class="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-600 tracking-[-0.02em] text-[var(--color-text)] leading-[1.05] mb-8">
             Pas de raccourcis.<br />
-            <span class="italic text-[var(--color-text-muted)]">Que de la methode.</span>
+            <span class="font-300 text-[var(--color-text-muted)]">Que de la methode.</span>
           </h2>
 
           <p class="text-[15px] font-300 text-[var(--color-text-muted)] leading-[1.7] max-w-lg mb-10">
@@ -293,11 +317,10 @@ import Footer from '../components/Footer.astro'
       <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-6" data-reveal-stagger>
         <!-- Featured article -->
         <a href="/blog/comprendre-le-forex" class="group relative border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-accent)]/20 transition-all duration-500">
-          <!-- Chart decoration -->
-          <div class="absolute inset-0 opacity-[0.03]">
-            <svg viewBox="0 0 400 200" fill="none" class="w-full h-full">
-              <path d="M0 180 Q100 120, 200 140 T400 60" stroke="#22c55e" stroke-width="1"/>
-            </svg>
+          <!-- Thumbnail -->
+          <div class="relative h-48 overflow-hidden">
+            <img src="/images/blog/forex-basics.jpg" alt="Forex" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a]"></div>
           </div>
           <div class="relative p-[clamp(2rem,3vw,3rem)]">
             <div class="flex items-center gap-3 mb-6">
@@ -318,7 +341,12 @@ import Footer from '../components/Footer.astro'
 
         <!-- 2 smaller articles stacked -->
         <div class="flex flex-col gap-6">
-          <a href="/blog/matieres-premieres-opportunites" class="group border border-[var(--color-border)] p-6 flex-1 hover:border-[var(--color-accent)]/20 transition-all duration-500">
+          <a href="/blog/matieres-premieres-opportunites" class="group border border-[var(--color-border)] flex-1 overflow-hidden hover:border-[var(--color-accent)]/20 transition-all duration-500">
+            <div class="relative h-28 overflow-hidden">
+              <img src="/images/blog/gold-commodities.jpg" alt="Commodites" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-[#0a0a0a]/50"></div>
+            </div>
+          <div class="p-6">
             <div class="flex items-center gap-3 mb-4">
               <span class="font-mono text-[9px] tracking-[0.15em] uppercase text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-2 py-1">Commodites</span>
               <span class="font-mono text-[9px] tracking-[0.1em] text-[var(--color-text-subtle)]">15/04/2026</span>
@@ -329,19 +357,26 @@ import Footer from '../components/Footer.astro'
             <span class="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] group-hover:text-[var(--color-accent)] transition-colors duration-300">
               Lire →
             </span>
+          </div>
           </a>
 
-          <a href="/blog/gestion-du-risque" class="group border border-[var(--color-border)] p-6 flex-1 hover:border-[var(--color-accent)]/20 transition-all duration-500">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="font-mono text-[9px] tracking-[0.15em] uppercase text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-2 py-1">Education</span>
-              <span class="font-mono text-[9px] tracking-[0.1em] text-[var(--color-text-subtle)]">10/04/2026</span>
+          <a href="/blog/gestion-du-risque" class="group border border-[var(--color-border)] flex-1 overflow-hidden hover:border-[var(--color-accent)]/20 transition-all duration-500">
+            <div class="relative h-28 overflow-hidden">
+              <img src="/images/blog/risk-management.jpg" alt="Risk Management" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-[#0a0a0a]/50"></div>
             </div>
-            <h3 class="font-display text-[clamp(1.2rem,2vw,1.5rem)] font-300 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-300 leading-[1.3] mb-3">
-              La gestion du risque : le pilier du trading rentable
-            </h3>
-            <span class="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] group-hover:text-[var(--color-accent)] transition-colors duration-300">
-              Lire →
-            </span>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="font-mono text-[9px] tracking-[0.15em] uppercase text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-2 py-1">Education</span>
+                <span class="font-mono text-[9px] tracking-[0.1em] text-[var(--color-text-subtle)]">10/04/2026</span>
+              </div>
+              <h3 class="font-display text-[clamp(1.2rem,2vw,1.5rem)] font-300 text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-300 leading-[1.3] mb-3">
+                La gestion du risque : le pilier du trading rentable
+              </h3>
+              <span class="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--color-text-subtle)] group-hover:text-[var(--color-accent)] transition-colors duration-300">
+                Lire →
+              </span>
+            </div>
           </a>
         </div>
       </div>

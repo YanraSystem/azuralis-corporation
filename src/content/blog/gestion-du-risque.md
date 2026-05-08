@@ -4,6 +4,7 @@ description: "Un bon trader ne se definit pas par ses gains, mais par sa capacit
 date: "2026-04-10"
 author: "Brahim Djelloul"
 category: "education"
+image: "/images/blog/risk-management.jpg"
 ---
 
 ## Pourquoi la gestion du risque est primordiale

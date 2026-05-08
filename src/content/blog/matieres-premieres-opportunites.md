@@ -4,6 +4,7 @@ description: "Or, petrole, argent — les commodites offrent des opportunites un
 date: "2026-04-15"
 author: "Brahim Djelloul"
 category: "matieres-premieres"
+image: "/images/blog/gold-commodities.jpg"
 ---
 
 ## Le marche des matieres premieres

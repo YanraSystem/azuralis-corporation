@@ -4,6 +4,7 @@ description: "Le marche des changes est le plus grand marche financier au monde.
 date: "2026-04-20"
 author: "Brahim Djelloul"
 category: "forex"
+image: "/images/blog/forex-basics.jpg"
 ---
 
 ## Qu'est-ce que le Forex ?

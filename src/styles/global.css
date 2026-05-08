@@ -14,7 +14,7 @@
   --color-accent: #3b82f6;
   --color-accent-muted: rgba(59, 130, 246, 0.15);
 
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body: "Outfit", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
